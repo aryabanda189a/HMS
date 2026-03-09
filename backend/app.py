@@ -1349,120 +1349,120 @@ def reschedule_appointment(appointment_id):
 
 
 
-@celery.task(name="tasks.daily_reminder")
-def daily_reminder():
-    today = DateTime.now().date()
-    appts = Appointment.query.filter_by(date=today, status="Booked").all()
-    for a in appts:
-        patient = User.query.get(a.patient_id)
-        doctor = User.query.get(a.doctor_id)
-        if patient and "@" in patient.username:
-            try:
-                msg = Message(subject="Appointment Reminder", recipients=[patient.username], body=f"Reminder: Appointment with Dr {doctor.username if doctor else 'N/A'} at {a.time} on {a.date}")
-                mail.send(msg)
-            except Exception:
-                pass
-    return "done"
+# @celery.task(name="tasks.daily_reminder")
+# def daily_reminder():
+#     today = DateTime.now().date()
+#     appts = Appointment.query.filter_by(date=today, status="Booked").all()
+#     for a in appts:
+#         patient = User.query.get(a.patient_id)
+#         doctor = User.query.get(a.doctor_id)
+#         if patient and "@" in patient.username:
+#             try:
+#                 msg = Message(subject="Appointment Reminder", recipients=[patient.username], body=f"Reminder: Appointment with Dr {doctor.username if doctor else 'N/A'} at {a.time} on {a.date}")
+#                 mail.send(msg)
+#             except Exception:
+#                 pass
+#     return "done"
 
-@celery.task(name="tasks.monthly_doctor_activity")
-def monthly_doctor_activity():
-    now = DateTime.now()
-    month = now.month
-    year = now.year
+# @celery.task(name="tasks.monthly_doctor_activity")
+# def monthly_doctor_activity():
+#     now = DateTime.now()
+#     month = now.month
+#     year = now.year
 
-    doctors = User.query.filter_by(role="doctor", approve=True).all()
+#     doctors = User.query.filter_by(role="doctor", approve=True).all()
 
-    for d in doctors:
-        appts = (
-            Appointment.query
-            .filter(
-                Appointment.doctor_id == d.id,
-                func.strftime("%m", Appointment.date) == f"{month:02d}"
-            )
-            .all()
-        )
+#     for d in doctors:
+#         appts = (
+#             Appointment.query
+#             .filter(
+#                 Appointment.doctor_id == d.id,
+#                 func.strftime("%m", Appointment.date) == f"{month:02d}"
+#             )
+#             .all()
+#         )
 
-        rows = []
-        completed = 0
-        cancelled = 0
+#         rows = []
+#         completed = 0
+#         cancelled = 0
 
-        for a in appts:
-            patient = User.query.get(a.patient_id)
-            treatment = Treatment.query.filter_by(appointment_id=a.id).first()
+#         for a in appts:
+#             patient = User.query.get(a.patient_id)
+#             treatment = Treatment.query.filter_by(appointment_id=a.id).first()
 
-            if a.status.lower() == "completed":
-                completed += 1
-            if a.status.lower() == "cancelled":
-                cancelled += 1
+#             if a.status.lower() == "completed":
+#                 completed += 1
+#             if a.status.lower() == "cancelled":
+#                 cancelled += 1
 
-            rows.append({
-                "date": str(a.date),
-                "time": str(a.time),
-                "patient": patient.username if patient else "-",
-                "status": a.status,
-                "diagnosis": treatment.diagnosis if treatment else "",
-                "prescription": treatment.prescription if treatment else ""
-            })
+#             rows.append({
+#                 "date": str(a.date),
+#                 "time": str(a.time),
+#                 "patient": patient.username if patient else "-",
+#                 "status": a.status,
+#                 "diagnosis": treatment.diagnosis if treatment else "",
+#                 "prescription": treatment.prescription if treatment else ""
+#             })
 
-        summary = {
-            "month": month,
-            "year": year,
-            "month_name": now.strftime("%B"),
-            "total": len(appts),
-            "completed": completed,
-            "cancelled": cancelled,
-        }
+#         summary = {
+#             "month": month,
+#             "year": year,
+#             "month_name": now.strftime("%B"),
+#             "total": len(appts),
+#             "completed": completed,
+#             "cancelled": cancelled,
+#         }
 
-        # Generate PDF
-        pdf_file = generate_monthly_report_pdf(d, rows, summary)
+#         # Generate PDF
+#         pdf_file = generate_monthly_report_pdf(d, rows, summary)
 
-        # Email PDF to doctor
-        if "@" in d.username:
-            try:
-                msg = Message(
-                    subject=f"Monthly Activity Report — {now.strftime('%B %Y')}",
-                    recipients=[d.username],
-                    body="Please find attached your monthly activity report.",
-                )
-                with app.open_resource(pdf_file) as pdf:
-                    msg.attach(os.path.basename(pdf_file), "application/pdf", pdf.read())
-                mail.send(msg)
-            except Exception as e:
-                print("Email error:", e)
+#         # Email PDF to doctor
+#         if "@" in d.username:
+#             try:
+#                 msg = Message(
+#                     subject=f"Monthly Activity Report — {now.strftime('%B %Y')}",
+#                     recipients=[d.username],
+#                     body="Please find attached your monthly activity report.",
+#                 )
+#                 with app.open_resource(pdf_file) as pdf:
+#                     msg.attach(os.path.basename(pdf_file), "application/pdf", pdf.read())
+#                 mail.send(msg)
+#             except Exception as e:
+#                 print("Email error:", e)
 
-    return "monthly_reports_done"
-
-
-@celery.task(name="tasks.export_treatments_csv")
-def export_treatments_csv(patient_id):
-    treatments = Treatment.query.join(Appointment).filter(Appointment.patient_id == patient_id).all()
-    output = StringIO()
-    writer = csv.writer(output)
-    writer.writerow(["appointment_date", "doctor_username", "diagnosis", "prescription", "notes"])
-    for t in treatments:
-        appt = Appointment.query.get(t.appointment_id)
-        doctor = User.query.get(appt.doctor_id) if appt else None
-        writer.writerow([str(appt.date) if appt else "", doctor.username if doctor else "", t.diagnosis, t.prescription, t.notes])
-    os.makedirs(REPORTS_DIR, exist_ok=True)
-    path = os.path.join(REPORTS_DIR, f"patient_{patient_id}_treatments.csv")
-    with open(path, "w", newline="") as f:
-        f.write(output.getvalue())
-    return path
+#     return "monthly_reports_done"
 
 
-@celery.task(name="tasks.export_professional_service_requests")
-def export_professional_service_requests(professional_id):
-    appts = Appointment.query.filter_by(doctor_id=professional_id).all()
-    output = StringIO()
-    writer = csv.writer(output)
-    writer.writerow(["appointment_id", "patient_id", "date", "time", "status", "remarks"])
-    for a in appts:
-        writer.writerow([a.id, a.patient_id, str(a.date), str(a.time), a.status, a.remarks])
-    os.makedirs(REPORTS_DIR, exist_ok=True)
-    path = os.path.join(REPORTS_DIR, f"doctor_{professional_id}_appointments.csv")
-    with open(path, "w", newline="") as f:
-        f.write(output.getvalue())
-    return path
+# @celery.task(name="tasks.export_treatments_csv")
+# def export_treatments_csv(patient_id):
+#     treatments = Treatment.query.join(Appointment).filter(Appointment.patient_id == patient_id).all()
+#     output = StringIO()
+#     writer = csv.writer(output)
+#     writer.writerow(["appointment_date", "doctor_username", "diagnosis", "prescription", "notes"])
+#     for t in treatments:
+#         appt = Appointment.query.get(t.appointment_id)
+#         doctor = User.query.get(appt.doctor_id) if appt else None
+#         writer.writerow([str(appt.date) if appt else "", doctor.username if doctor else "", t.diagnosis, t.prescription, t.notes])
+#     os.makedirs(REPORTS_DIR, exist_ok=True)
+#     path = os.path.join(REPORTS_DIR, f"patient_{patient_id}_treatments.csv")
+#     with open(path, "w", newline="") as f:
+#         f.write(output.getvalue())
+#     return path
+
+
+# @celery.task(name="tasks.export_professional_service_requests")
+# def export_professional_service_requests(professional_id):
+#     appts = Appointment.query.filter_by(doctor_id=professional_id).all()
+#     output = StringIO()
+#     writer = csv.writer(output)
+#     writer.writerow(["appointment_id", "patient_id", "date", "time", "status", "remarks"])
+#     for a in appts:
+#         writer.writerow([a.id, a.patient_id, str(a.date), str(a.time), a.status, a.remarks])
+#     os.makedirs(REPORTS_DIR, exist_ok=True)
+#     path = os.path.join(REPORTS_DIR, f"doctor_{professional_id}_appointments.csv")
+#     with open(path, "w", newline="") as f:
+#         f.write(output.getvalue())
+#     return path
 
 def generate_monthly_report_pdf(doctor, rows, summary):
     month_name = summary["month_name"]
@@ -1549,5 +1549,6 @@ def test_email():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
 
 
