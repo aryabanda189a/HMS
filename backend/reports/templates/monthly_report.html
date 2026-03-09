@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Monthly Doctor Activity Report</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2C3E50;
+        }
+
+        .summary-box {
+            background: #ecf0f1;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #7f8c8d;
+        }
+
+        th {
+            background: #34495e;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Hospital Management System</h1>
+    <h2>Doctor Activity Report — {{ month_name }} {{ year }}</h2>
+
+    <div class="summary-box">
+        <p><strong>Doctor:</strong> {{ doctor_name }}</p>
+        <p><strong>Total Appointments:</strong> {{ total }}</p>
+        <p><strong>Completed:</strong> {{ completed }}</p>
+        <p><strong>Cancelled:</strong> {{ cancelled }}</p>
+    </div>
+
+    <h3>Appointment Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Status</th>
+                <th>Diagnosis</th>
+                <th>Prescription</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.date }}</td>
+                <td>{{ row.time }}</td>
+                <td>{{ row.patient }}</td>
+                <td>{{ row.status }}</td>
+                <td>{{ row.diagnosis }}</td>
+                <td>{{ row.prescription }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Generated automatically by HMS — {{ generation_time }}
+    </div>
+</body>
+</html>
