@@ -169,6 +169,7 @@ def is_patient_claims(claims):
     return claims.get("role") == "patient"
 
 
+initialize_database()
 # ---------------------------
 # Home
 # ---------------------------
@@ -1546,7 +1547,7 @@ def test_email():
 # Run
 # ---------------------------
 if __name__ == "__main__":
-    initialize_database()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
 
