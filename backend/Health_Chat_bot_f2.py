@@ -1,30 +1,18 @@
-import pandas as pd
 import numpy as np
-from sklearn import preprocessing
-from sklearn.tree import DecisionTreeClassifier, _tree
+import joblib
+import os
 import csv
+from sklearn.tree import _tree
 
-# -----------------------------
-# Load datasets (UNCHANGED)
-# -----------------------------
-training = pd.read_csv('Data/Training.csv')
-testing  = pd.read_csv('Data/Testing.csv')
+# -----------------------------------------
+# Load Saved Model Files
+# -----------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-cols = training.columns[:-1]
-x = training[cols]
-y = training['prognosis']
-
-# Encode labels
-le = preprocessing.LabelEncoder()
-le.fit(y)
-y = le.transform(y)
-
-# Train model
-clf = DecisionTreeClassifier()
-clf.fit(x, y)
-
-# Reduced data
-reduced_data = training.groupby(training['prognosis']).max()
+clf = joblib.load(os.path.join(BASE_DIR, "chatbot_model.pkl"))
+cols = joblib.load(os.path.join(BASE_DIR, "model_columns.pkl"))
+le = joblib.load(os.path.join(BASE_DIR, "label_encoder.pkl"))
+reduced_data = joblib.load(os.path.join(BASE_DIR, "reduced_data.pkl"))
 
 # -----------------------------------------
 # SESSION STORAGE FOR TREE TRAVERSAL
@@ -35,7 +23,7 @@ tree_state = {
 }
 
 # -----------------------------------------
-# Utility Functions (UNCHANGED)
+# Utility Functions
 # -----------------------------------------
 def print_disease(node):
     node = node[0]
@@ -57,6 +45,7 @@ def start_chat():
 # Continue Tree Based on User Answer
 # -----------------------------------------
 def answer_question(user_answer):
+
     tree_ = clf.tree_
     node = tree_state["node"]
 
@@ -64,6 +53,7 @@ def answer_question(user_answer):
     threshold = tree_.threshold[node]
 
     if feature != _tree.TREE_UNDEFINED:
+
         if user_answer.lower() == "yes":
             val = 1
         else:
@@ -77,6 +67,7 @@ def answer_question(user_answer):
             tree_state["node"] = tree_.children_right[node]
 
         return ask_next_question()
+
     else:
         return get_result()
 
@@ -85,15 +76,19 @@ def answer_question(user_answer):
 # Ask Next Question
 # -----------------------------------------
 def ask_next_question():
+
     tree_ = clf.tree_
     node = tree_state["node"]
 
     if tree_.feature[node] != _tree.TREE_UNDEFINED:
+
         symptom = cols[tree_.feature[node]]
+
         return {
             "type": "question",
             "question": f"Do you have {symptom.replace('_',' ')} ?"
         }
+
     else:
         return get_result()
 
@@ -102,6 +97,7 @@ def ask_next_question():
 # Final Result
 # -----------------------------------------
 def get_result():
+
     tree_ = clf.tree_
     node = tree_state["node"]
 
@@ -109,16 +105,22 @@ def get_result():
     disease = present_disease[0]
 
     red_cols = reduced_data.columns
-    symptoms_given = red_cols[reduced_data.loc[present_disease].values[0].nonzero()]
 
-    # Doctor consultation risk
+    symptoms_given = red_cols[
+        reduced_data.loc[present_disease].values[0].nonzero()
+    ]
+
     consult = {}
-    with open('Data/doc_consult.csv', 'r') as f:
+
+    with open(os.path.join(BASE_DIR, "Data", "doc_consult.csv"), "r") as f:
+
         reader = csv.reader(f)
+
         for row in reader:
             consult[row[0]] = int(row[1])
 
     consult_msg = "You may consult a doctor"
+
     if disease in consult and consult[disease] > 50:
         consult_msg = "You should consult a doctor as soon as possible"
 
