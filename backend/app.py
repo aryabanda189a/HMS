@@ -19,8 +19,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from flask_caching import Cache
 from flask_mail import Mail, Message
-from celery import Celery
-from celery.schedules import crontab
+# from celery import Celery
+# from celery.schedules import crontab
 
 from Health_Chat_bot_f2 import start_chat, answer_question
 
@@ -92,42 +92,42 @@ def appointment_to_dict(a):
 # ---------------------------
 # Celery factory
 # ---------------------------
-def make_celery(flask_app):
-    celery = Celery(
-        flask_app.import_name,
-        backend=flask_app.config.get("result_backend"),
-        broker=flask_app.config.get("broker_url"),
-    )
-    celery.conf.update(flask_app.config)
+# def make_celery(flask_app):
+#     celery = Celery(
+#         flask_app.import_name,
+#         backend=flask_app.config.get("result_backend"),
+#         broker=flask_app.config.get("broker_url"),
+#     )
+#     celery.conf.update(flask_app.config)
 
-    class ContextTask(celery.Task):
-        def __call__(self, *args, **kwargs):
-            with flask_app.app_context():
-                return super().__call__(*args, **kwargs)
+#     class ContextTask(celery.Task):
+#         def __call__(self, *args, **kwargs):
+#             with flask_app.app_context():
+#                 return super().__call__(*args, **kwargs)
 
-    celery.Task = ContextTask
-    return celery
+#     celery.Task = ContextTask
+#     return celery
 
 
-celery = make_celery(app)
-celery.conf.worker_enable_remote_control = True
-celery.conf.task_send_sent_event = True
-celery.conf.timezone = "Asia/Kolkata"
-celery.conf.enable_utc = False
-celery.conf.beat_max_loop_interval = 1
+# celery = make_celery(app)
+# celery.conf.worker_enable_remote_control = True
+# celery.conf.task_send_sent_event = True
+# celery.conf.timezone = "Asia/Kolkata"
+# celery.conf.enable_utc = False
+# celery.conf.beat_max_loop_interval = 1
 
 # Celery beat schedule (if you run celery beat)
-celery.conf.beat_schedule = {
-    "send-daily-reminder-12-30": {
-        "task": "tasks.daily_reminder",
-        #  "schedule": crontab()
-        "schedule": crontab(hour=17, minute=53),
-    },
-    "monthly-doctor-activity": {
-        "task": "tasks.monthly_doctor_activity",
-        "schedule": crontab(hour=17, minute=53, day_of_month=30),
-    }
-}
+# celery.conf.beat_schedule = {
+#     "send-daily-reminder-12-30": {
+#         "task": "tasks.daily_reminder",
+#         #  "schedule": crontab()
+#         "schedule": crontab(hour=17, minute=53),
+#     },
+#     "monthly-doctor-activity": {
+#         "task": "tasks.monthly_doctor_activity",
+#         "schedule": crontab(hour=17, minute=53, day_of_month=30),
+#     }
+# }
 
 # Ensure reports dir exists
 REPORTS_DIR = os.path.join(app.root_path, "reports")
@@ -1547,4 +1547,5 @@ def test_email():
 # ---------------------------
 if __name__ == "__main__":
     initialize_database()
-    app.run(host="0.0.0.0", port=5000,debug=True,use_reloader=False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
