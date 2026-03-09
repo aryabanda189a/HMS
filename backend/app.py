@@ -71,7 +71,7 @@ db.init_app(app)
 jwt = JWTManager(app)
 cache = Cache(app)
 mail = Mail(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 def appointment_to_dict(a):
     """Return a JSON-serializable dict for an Appointment object."""
     return {
@@ -1549,3 +1549,4 @@ if __name__ == "__main__":
     initialize_database()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
