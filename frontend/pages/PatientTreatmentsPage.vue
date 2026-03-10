@@ -166,7 +166,7 @@ export default {
     async fetchServiceRequest() {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/customer/close_service_request/${this.id}`,
+          `https://hms-eb5j.onrender.com/customer/close_service_request/${this.id}`,
           {
             method: "GET",
             headers: {
@@ -215,7 +215,7 @@ export default {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/customer/close_service_request/${this.formData.request_id}`,
+          `https://hms-eb5j.onrender.com/customer/close_service_request/${this.formData.request_id}`,
           {
             method: "PUT",
             headers: {
