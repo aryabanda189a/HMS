@@ -96,7 +96,7 @@ export default {
   },
 
   async mounted() {
-    this.doctorId = this.$route.params.id;
+    this.doctorId = Number(this.$route.params.id);
 
     // If the router also passed doctor name (optional improvement)
     if (this.$route.query.name) {
@@ -153,7 +153,7 @@ export default {
             Authorization: "Bearer " + localStorage.getItem("token")
           },
           body: JSON.stringify({
-            doctor_id: this.doctorId,
+            doctor_id: Number(this.doctorId),
             date,
             time
           })
@@ -548,3 +548,4 @@ export default {
 }
 
 </style>
+
