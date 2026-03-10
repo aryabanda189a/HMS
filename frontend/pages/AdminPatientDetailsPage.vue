@@ -107,7 +107,7 @@ export default {
     const id = this.$route.params.id;
 
     try {
-      const res = await fetch(`http://127.0.0.1:5000/admin/patient/${id}`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/admin/patient/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -452,4 +452,5 @@ export default {
     font-size: 1.5rem;
   }
 }
+
 </style>
