@@ -247,7 +247,7 @@ export default {
     // LOAD DEPARTMENTS
     // -------------------------------------------------------
     async fetchDepartments() {
-      const res = await fetch("http://127.0.0.1:5000/departments", {
+      const res = await fetch(" https://hms-eb5j.onrender.com/departments", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
       if (res.ok) this.departments = await res.json();
@@ -257,7 +257,7 @@ export default {
     // LOAD DOCTORS
     // -------------------------------------------------------
     async fetchDoctors() {
-      const res = await fetch("http://127.0.0.1:5000/admin/doctors", {
+      const res = await fetch(" https://hms-eb5j.onrender.com/admin/doctors", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
       if (res.ok) this.doctors = await res.json();
@@ -267,7 +267,7 @@ export default {
     // ADD DOCTOR
     // -------------------------------------------------------
     async addDoctor() {
-      const res = await fetch("http://127.0.0.1:5000/admin/doctors", {
+      const res = await fetch(" https://hms-eb5j.onrender.com/admin/doctors", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -299,7 +299,7 @@ export default {
       this.selectedDoctorId = id;
       this.editingProfile = true;
 
-      const res = await fetch(`http://127.0.0.1:5000/admin/doctors/${id}`, {
+      const res = await fetch(` https://hms-eb5j.onrender.com/admin/doctors/${id}`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
 
@@ -319,7 +319,7 @@ export default {
     // -------------------------------------------------------
     async saveProfile() {
       const res = await fetch(
-        `http://127.0.0.1:5000/admin/doctors/${this.selectedDoctorId}/profile`,
+        ` https://hms-eb5j.onrender.com/admin/doctors/${this.selectedDoctorId}/profile`,
         {
           method: "POST",
           headers: {
@@ -344,7 +344,7 @@ export default {
     async deleteDoctor(id) {
       if (!confirm("Are you sure you want to delete this doctor?")) return;
 
-      const res = await fetch(`http://127.0.0.1:5000/admin/doctors/${id}`, {
+      const res = await fetch(` https://hms-eb5j.onrender.com/admin/doctors/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
@@ -363,7 +363,7 @@ export default {
       const action = doc.blocked ? "unblock" : "block";
 
       const res = await fetch(
-        `http://127.0.0.1:5000/admin/block_user/${doc.id}`,
+        ` https://hms-eb5j.onrender.com/admin/block_user/${doc.id}`,
         {
           method: "POST",
           headers: {
