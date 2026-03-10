@@ -80,7 +80,7 @@ export default {
     // ---------------- Start Q&A Chat ----------------
     async startChat() {
       try {
-        const res = await axios.get("https://hms-backend.onrender.com/chat/start");
+        const res = await axios.get("https://hms-eb5j.onrender.com/chat/start");
 
         if (res.data.type === "question") {
           this.chatLog.push("🤖 " + res.data.question);
@@ -104,7 +104,7 @@ export default {
       this.chatLog.push("You: " + userText);
 
       try {
-        const res = await axios.post("https://hms-backend.onrender.com/chat/answer", {
+        const res = await axios.post("https://hms-eb5j.onrender.com/chat/answer", {
           answer: userText
         });
 
@@ -137,7 +137,7 @@ export default {
       }
 
       try {
-        const res = await fetch(`https://hms-backend.onrender.com/get-claims`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/get-claims`, {
           headers: { Authorization: "Bearer " + token },
         });
 
