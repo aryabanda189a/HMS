@@ -98,7 +98,7 @@ export default {
   methods: {
     async fetchDepartments() {
       try {
-        const res = await fetch("http://127.0.0.1:5000/admin/departments", {
+        const res = await fetch(" https://hms-eb5j.onrender.com/admin/departments", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -114,7 +114,7 @@ export default {
 
     async addDepartment() {
       try {
-        const res = await fetch("http://127.0.0.1:5000/admin/departments", {
+        const res = await fetch(" https://hms-eb5j.onrender.com/admin/departments", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export default {
       if (!confirm("Are you sure you want to delete this department?")) return;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/admin/departments/${id}`, {
+        const res = await fetch(` https://hms-eb5j.onrender.com/admin/departments/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -428,4 +428,5 @@ export default {
     font-size: 1.8rem;
   }
 }
+
 </style>
