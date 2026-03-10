@@ -103,7 +103,7 @@ export default {
       this.messages = [];
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/doctor/profile`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/profile`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -142,7 +142,7 @@ export default {
     /** Fetch list of departments (specializations) **/
     async fetchSpecializations() {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/departments`);
+        const res = await fetch(`https://hms-eb5j.onrender.com/departments`);
         if (res.ok) {
           this.specializationOptions = await res.json();
         }
