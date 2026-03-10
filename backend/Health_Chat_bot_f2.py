@@ -9,11 +9,10 @@ from sklearn.tree import _tree
 # -----------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-clf = joblib.load(os.path.join(BASE_DIR, "chatbot_model.pkl"))
-cols = joblib.load(os.path.join(BASE_DIR, "model_columns.pkl"))
-le = joblib.load(os.path.join(BASE_DIR, "label_encoder.pkl"))
-reduced_data = joblib.load(os.path.join(BASE_DIR, "reduced_data.pkl"))
-
+clf = joblib.load(os.path.join(BASE_DIR, "model", "chatbot_model.pkl"))
+cols = joblib.load(os.path.join(BASE_DIR, "model", "model_columns.pkl"))
+le = joblib.load(os.path.join(BASE_DIR, "model", "label_encoder.pkl"))
+reduced_data = joblib.load(os.path.join(BASE_DIR, "model", "reduced_data.pkl"))
 # -----------------------------------------
 # SESSION STORAGE FOR TREE TRAVERSAL
 # -----------------------------------------
@@ -131,3 +130,4 @@ def get_result():
         "other_symptoms": list(symptoms_given),
         "advice": consult_msg
     }
+
