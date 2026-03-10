@@ -178,7 +178,7 @@ export default {
 
     async fetchAppointments() {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/patient/appointments`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/patient/appointments`, {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         });
 
@@ -213,7 +213,7 @@ export default {
       if (!confirm("Are you sure you want to cancel this appointment?")) return;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/patient/appointments/${id}/cancel`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/patient/appointments/${id}/cancel`, {
           method: "POST",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -268,7 +268,7 @@ export default {
       this.processing = true;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/${this.form.appointmentId}/reschedule`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/appointments/${this.form.appointmentId}/reschedule`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
