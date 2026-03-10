@@ -261,7 +261,7 @@ export default {
   methods: {
     // ------------------ FETCH DATA ------------------
     async fetchDoctors() {
-      const res = await fetch(`http://127.0.0.1:5000/admin/doctors`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/admin/doctors`, {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
@@ -270,7 +270,7 @@ export default {
     },
 
     async fetchPatients() {
-      const res = await fetch(`http://127.0.0.1:5000/admin/patients`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/admin/patients`, {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
@@ -279,7 +279,7 @@ export default {
     },
 
     async fetchAppointments() {
-      const res = await fetch(`http://127.0.0.1:5000/admin/appointments`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/admin/appointments`, {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
@@ -294,7 +294,7 @@ export default {
 
     // ------------------ UPDATE DOCTOR ------------------
     async updateDoctor(userId, action) {
-      await fetch(`http://127.0.0.1:5000/admin/block_user/${userId}`, {
+      await fetch(`https://hms-eb5j.onrender.com/admin/block_user/${userId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -314,7 +314,7 @@ export default {
 
       const doctorId = appt.doctor_id;
 
-      const res = await fetch(`http://127.0.0.1:5000/doctor/${doctorId}/availability`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/doctor/${doctorId}/availability`, {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
@@ -356,7 +356,7 @@ export default {
       this.processing = true;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/${this.form.appointmentId}/reschedule`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/appointments/${this.form.appointmentId}/reschedule`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
