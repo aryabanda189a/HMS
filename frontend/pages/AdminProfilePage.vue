@@ -53,7 +53,7 @@ export default {
   methods: {
     async fetchProfileData() {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/admin/profile`, {
+        const response = await fetch(`https://hms-eb5j.onrender.com/admin/profile`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
