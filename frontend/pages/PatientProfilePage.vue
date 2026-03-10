@@ -144,7 +144,7 @@ export default {
     /** Fetch profile from backend */
     async fetchCustomerProfile() {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/patient/profile`, {
+        const response = await fetch(`https://hms-eb5j.onrender.com/patient/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -195,7 +195,7 @@ export default {
       }
 
       try {
-        const response = await fetch(`http://127.0.0.1:5000/patient/profile`, {
+        const response = await fetch(`https://hms-eb5j.onrender.com/patient/profile`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
