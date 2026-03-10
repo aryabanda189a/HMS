@@ -113,7 +113,7 @@ export default {
       this.message = null;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/doctor/${this.doctorId}/availability`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/${this.doctorId}/availability`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -146,7 +146,7 @@ export default {
       if (!confirm(`Confirm appointment with Dr. ${this.doctorName} on ${this.formatDate(date)} at ${time}?`)) return;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/book`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/appointments/book`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -546,4 +546,5 @@ export default {
     font-size: 1.5rem;
   }
 }
+
 </style>
