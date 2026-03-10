@@ -131,7 +131,7 @@ export default {
       this.loading = true;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/doctor/availability`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/availability`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -176,7 +176,7 @@ export default {
       });
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/doctor/availability`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/availability`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -634,4 +634,5 @@ export default {
     font-size: 1.5rem;
   }
 }
+
 </style>
