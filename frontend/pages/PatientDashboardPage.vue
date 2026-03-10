@@ -125,7 +125,7 @@ export default {
     /** Load dashboard data from backend **/
     async fetchDashboard() {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/patient/dashboard`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/patient/dashboard`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
