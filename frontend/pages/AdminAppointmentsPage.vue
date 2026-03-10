@@ -91,7 +91,7 @@ export default {
   methods: {
     async fetchDashboardStats() {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/admin/dashboard`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/admin/dashboard`, {
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
           }
@@ -110,7 +110,7 @@ export default {
 
     async fetchAppointments() {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/admin/appointments`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/admin/appointments`, {
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
           }
