@@ -115,7 +115,7 @@ export default {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/admin/export/${this.professionalId}`,
+          `https://hms-eb5j.onrender.com/admin/export/${this.professionalId}`,
           {
             method: "GET",
             headers: {
@@ -146,7 +146,7 @@ export default {
     async fetchDownloads() {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/admin/reports/list`,
+          `https://hms-eb5j.onrender.com/admin/reports/list`,
           {
             method: "GET",
             headers: {
@@ -167,7 +167,7 @@ export default {
     async downloadFile(filename) {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/admin/reports/download/${filename}`,
+          `https://hms-eb5j.onrender.com/admin/reports/download/${filename}`,
           {
             method: "GET",
             headers: {
