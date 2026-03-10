@@ -164,7 +164,7 @@ export default {
     const deptId = this.$route.params.id;
 
     try {
-      const res = await fetch(`http://127.0.0.1:5000/departments/${deptId}`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/departments/${deptId}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
@@ -196,7 +196,7 @@ export default {
       this.bookedAppointments = [];
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/doctor/${doctor.id}/availability`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/${doctor.id}/availability`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -208,7 +208,7 @@ export default {
           this.availableSlots = data.availability || [];
 
           // Fetch booked appointments to disable them
-          const bookedRes = await fetch(`http://127.0.0.1:5000/doctor/${doctor.id}/appointments`, {
+          const bookedRes = await fetch(`https://hms-eb5j.onrender.com/doctor/${doctor.id}/appointments`, {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token")
             }
@@ -242,7 +242,7 @@ export default {
       if (!confirm(`Confirm appointment with Dr. ${this.selectedDoctor.name} on ${this.formatDate(date)} at ${time}?`)) return;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/book`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/appointments/book`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -811,4 +811,5 @@ export default {
     justify-content: center;
   }
 }
+
 </style>
