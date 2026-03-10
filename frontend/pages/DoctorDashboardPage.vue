@@ -152,7 +152,7 @@ export default {
           return;
         }
 
-        const res = await fetch(`http://127.0.0.1:5000/doctor/appointments`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/appointments`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -175,7 +175,7 @@ export default {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`http://127.0.0.1:5000/doctor/patients`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/patients`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -225,7 +225,7 @@ export default {
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(
-          `http://127.0.0.1:5000/doctor/appointments/${this.selectedAppointmentId}/complete`,
+          `https://hms-eb5j.onrender.com/doctor/appointments/${this.selectedAppointmentId}/complete`,
           {
             method: "POST",
             headers: {
