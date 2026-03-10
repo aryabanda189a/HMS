@@ -87,7 +87,7 @@ export default {
       const payload = JSON.parse(atob(token.split(".")[1]));
       const userId = payload.user_id;
 
-      const res = await fetch(`http://127.0.0.1:5000/patient/${userId}/history`, {
+      const res = await fetch(`https://hms-eb5j.onrender.com/patient/${userId}/history`, {
         headers: { Authorization: "Bearer " + token },
       });
 
@@ -404,4 +404,5 @@ export default {
     font-size: 1.5rem;
   }
 }
+
 </style>
