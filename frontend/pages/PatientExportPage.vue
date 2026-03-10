@@ -102,7 +102,7 @@ export default {
       this.message = null;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/patient/export_treatments`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/patient/export_treatments`, {
           method: "GET",
           headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
         });
@@ -128,7 +128,7 @@ export default {
     // 🔵 Fetch downloadable reports
     async fetchDownloads() {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/patient/reports/list`, {
+        const response = await fetch(`https://hms-eb5j.onrender.com/patient/reports/list`, {
           method: "GET",
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         });
@@ -159,7 +159,7 @@ export default {
     // 🔵 Download File
     async downloadFile(filename) {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/patient/reports/download/${filename}`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/patient/reports/download/${filename}`, {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         });
 
@@ -548,4 +548,5 @@ export default {
     font-size: 1.5rem;
   }
 }
+
 </style>
