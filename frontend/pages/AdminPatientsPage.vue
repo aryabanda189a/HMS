@@ -137,7 +137,7 @@ export default {
       this.message = null;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/admin/patients`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/admin/patients`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -151,7 +151,7 @@ export default {
             data.map(async (u) => {
               try {
                 const profileRes = await fetch(
-                  `http://127.0.0.1:5000/admin/patient/${u.id}`,
+                  `https://hms-eb5j.onrender.com/admin/patient/${u.id}`,
                   {
                     headers: {
                       Authorization: "Bearer " + localStorage.getItem("token")
@@ -208,7 +208,7 @@ export default {
 
       try {
         const res = await fetch(
-          `http://127.0.0.1:5000/admin/block_user/${patient.id}`,
+          `https://hms-eb5j.onrender.com/admin/block_user/${patient.id}`,
           {
             method: "POST",
             headers: {
