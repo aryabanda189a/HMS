@@ -54,7 +54,7 @@ export default {
       this.category = null;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/login`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(this.form)
@@ -72,7 +72,7 @@ export default {
         const token = data.access_token;
 
         // Fetch claims
-        const claimsRes = await fetch(`http://127.0.0.1:5000/get-claims`, {
+        const claimsRes = await fetch(`https://hms-eb5j.onrender.com/get-claims`, {
           headers: { Authorization: "Bearer " + token }
         });
 
