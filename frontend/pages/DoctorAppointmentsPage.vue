@@ -126,7 +126,7 @@ export default {
       this.message = null;
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/doctor/appointments`, {
+        const res = await fetch(`https://hms-eb5j.onrender.com/doctor/appointments`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
