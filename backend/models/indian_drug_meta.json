@@ -1,0 +1,209 @@
+{
+  "M01AB": {
+    "generic": "Diclofenac",
+    "brands": [
+      "Voveran 50mg",
+      "Voltaren",
+      "Diclomol",
+      "Reactin"
+    ],
+    "top_brand": "Voveran 50mg",
+    "manufacturer": "Novartis India / Sun Pharma",
+    "category": "Anti-inflammatory (NSAID)",
+    "form": "Tablet / Gel",
+    "mrp_per_strip": 45,
+    "units_per_strip": 10,
+    "lead_time_days": 3,
+    "schedule": "H",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      1,
+      2,
+      6,
+      7,
+      8
+    ],
+    "disease_season": "Arthritis flares in winter, muscle pain year-round"
+  },
+  "M01AE": {
+    "generic": "Ibuprofen",
+    "brands": [
+      "Brufen 400mg",
+      "Combiflam",
+      "Ibugesic Plus",
+      "Advil"
+    ],
+    "top_brand": "Brufen 400mg",
+    "manufacturer": "Abbott India / Pfizer",
+    "category": "Anti-inflammatory (NSAID)",
+    "form": "Tablet / Syrup",
+    "mrp_per_strip": 30,
+    "units_per_strip": 15,
+    "lead_time_days": 3,
+    "schedule": "OTC",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "disease_season": "High during monsoon fever season"
+  },
+  "N02BA": {
+    "generic": "Aspirin",
+    "brands": [
+      "Disprin 350mg",
+      "Ecosprin 75mg",
+      "Delisprin",
+      "Loprin"
+    ],
+    "top_brand": "Ecosprin 75mg",
+    "manufacturer": "USV Ltd / Reckitt Benckiser",
+    "category": "Analgesic / Antiplatelet",
+    "form": "Tablet",
+    "mrp_per_strip": 18,
+    "units_per_strip": 14,
+    "lead_time_days": 2,
+    "schedule": "OTC",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      11,
+      12,
+      1,
+      2
+    ],
+    "disease_season": "Used year-round for cardiac patients"
+  },
+  "N02BE": {
+    "generic": "Paracetamol",
+    "brands": [
+      "Dolo 650",
+      "Calpol 500",
+      "Crocin 500",
+      "Sumo L",
+      "Febrex"
+    ],
+    "top_brand": "Dolo 650",
+    "manufacturer": "Micro Labs / GSK / Alkem",
+    "category": "Analgesic / Antipyretic",
+    "form": "Tablet / Syrup / Suspension",
+    "mrp_per_strip": 30,
+    "units_per_strip": 15,
+    "lead_time_days": 1,
+    "schedule": "OTC",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "disease_season": "Peak during monsoon (dengue/malaria fever), also winter flu"
+  },
+  "N05B": {
+    "generic": "Anxiolytics (Alprazolam / Diazepam)",
+    "brands": [
+      "Alprax 0.25mg",
+      "Restyl 0.5mg",
+      "Trika 0.5mg",
+      "Lonazep"
+    ],
+    "top_brand": "Alprax 0.25mg",
+    "manufacturer": "Pfizer / Sun Pharma / Torrent",
+    "category": "Anxiolytic / Benzodiazepine",
+    "form": "Tablet",
+    "mrp_per_strip": 55,
+    "units_per_strip": 10,
+    "lead_time_days": 4,
+    "schedule": "H / X",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      3,
+      4,
+      10,
+      11
+    ],
+    "disease_season": "Higher during exam season & festival periods"
+  },
+  "N05C": {
+    "generic": "Hypnotics / Sleeping aids (Nitrazepam / Zolpidem)",
+    "brands": [
+      "Nitrest 5mg",
+      "Nitravet",
+      "Stilnox",
+      "Zolfresh"
+    ],
+    "top_brand": "Nitrest 5mg",
+    "manufacturer": "Sun Pharma / Sanofi",
+    "category": "Hypnotic / Sedative",
+    "form": "Tablet",
+    "mrp_per_strip": 75,
+    "units_per_strip": 10,
+    "lead_time_days": 5,
+    "schedule": "H / X",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      5,
+      6,
+      11,
+      12
+    ],
+    "disease_season": "Stress-related insomnia spikes in summer & year-end"
+  },
+  "R03": {
+    "generic": "Bronchodilators (Salbutamol / Budesonide)",
+    "brands": [
+      "Asthalin 100mcg",
+      "Seroflo 250",
+      "Foracort 200",
+      "Budecort"
+    ],
+    "top_brand": "Asthalin Inhaler",
+    "manufacturer": "Cipla / Sun Pharma / Glenmark",
+    "category": "Respiratory / Bronchodilator",
+    "form": "Inhaler / Nebulisation solution",
+    "mrp_per_strip": 180,
+    "units_per_strip": 1,
+    "lead_time_days": 5,
+    "schedule": "H",
+    "gst_percent": 5,
+    "seasonal_peaks": [
+      11,
+      12,
+      1,
+      2,
+      6,
+      7
+    ],
+    "disease_season": "Winter smog (Delhi/NCR), monsoon mold spores"
+  },
+  "R06": {
+    "generic": "Antihistamines (Cetirizine / Fexofenadine)",
+    "brands": [
+      "Cetriz 10mg",
+      "Allegra 120mg",
+      "Atarax 25mg",
+      "Histacet",
+      "Okacet"
+    ],
+    "top_brand": "Allegra 120mg",
+    "manufacturer": "Cipla / Sanofi / UCB",
+    "category": "Antihistamine",
+    "form": "Tablet / Syrup",
+    "mrp_per_strip": 65,
+    "units_per_strip": 10,
+    "lead_time_days": 3,
+    "schedule": "OTC / H",
+    "gst_percent": 12,
+    "seasonal_peaks": [
+      2,
+      3,
+      4,
+      7,
+      8
+    ],
+    "disease_season": "Spring allergies (Feb-Apr), monsoon dust mites (Jul-Aug)"
+  }
+}
